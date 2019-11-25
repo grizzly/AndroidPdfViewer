@@ -245,8 +245,6 @@ public class PDFView extends RelativeLayout {
     public PDFView(Context context, AttributeSet set) {
         super(context, set);
 
-        renderingHandlerThread = new HandlerThread("PDF renderer");
-
         if (isInEditMode()) {
             return;
         }
@@ -461,6 +459,12 @@ public class PDFView extends RelativeLayout {
         }
         animationManager.computeFling();
     }
+    
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        renderingHandlerThread = new HandlerThread("PDF renderer");
+    }    
 
     @Override
     protected void onDetachedFromWindow() {
